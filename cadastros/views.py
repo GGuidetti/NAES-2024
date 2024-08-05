@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 
 # ################# CREATE #################
 
+
 class AutorCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Autor
@@ -19,10 +20,9 @@ class AutorCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-autor')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['titulo'] = "Cadastro de Autor"
-        context['botao'] = "Cadastrar"
         return context
 
 
@@ -33,6 +33,11 @@ class CategoriaCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categoria')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Cadastro de Categoria"
+        return context
+
 
 class IngredienteCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -40,6 +45,11 @@ class IngredienteCreate(LoginRequiredMixin, CreateView):
     fields = ['nome', 'qtde', 'unidade_medida']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-ingrediente')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Cadastro de Ingrediente"
+        return context
 
 
 class ReceitaCreate(LoginRequiredMixin, CreateView):
@@ -49,6 +59,11 @@ class ReceitaCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-receita')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Cadastro de Receita"
+        return context
+
 
 class ComentarioCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -56,6 +71,11 @@ class ComentarioCreate(LoginRequiredMixin, CreateView):
     fields = ['texto', 'autor']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-comentario')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Cadastro de Comentário"
+        return context
 
 
 class AvaliacaoCreate(LoginRequiredMixin, CreateView):
@@ -65,6 +85,13 @@ class AvaliacaoCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-avaliacao')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Cadastro de Avaliação"
+        return context
+
+
+# ################# UPDATE #################
 
 # ################# UPDATE #################
 
@@ -75,8 +102,8 @@ class AutorUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-autor')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['titulo'] = "Editar Autor"
         context['botao'] = "Salvar"
         return context
@@ -89,6 +116,12 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categoria')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Editar Categoria"
+        context['botao'] = "Salvar"
+        return context
+
 
 class IngredienteUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -96,6 +129,12 @@ class IngredienteUpdate(LoginRequiredMixin, UpdateView):
     fields = ['nome', 'qtde', 'unidade_medida']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-ingrediente')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Editar Ingrediente"
+        context['botao'] = "Salvar"
+        return context
 
 
 class ReceitaUpdate(LoginRequiredMixin, UpdateView):
@@ -105,21 +144,39 @@ class ReceitaUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-receita')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Editar Receita"
+        context['botao'] = "Salvar"
+        return context
+
 
 class ComentarioUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Comentario
-    fields = ['texto', 'autor', 'receita']
+    fields = ['texto', 'autor']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-comentario')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Editar Comentário"
+        context['botao'] = "Salvar"
+        return context
 
 
 class AvaliacaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Avaliacao
-    fields = ['nota', 'autor', 'receita']
+    fields = ['nota', 'autor']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-avaliacao')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Editar Avaliação"
+        context['botao'] = "Salvar"
+        return context
 
 
 # ################# DELETE #################
