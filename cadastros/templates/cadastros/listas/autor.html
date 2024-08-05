@@ -1,0 +1,42 @@
+{% extends 'paginas/modelo-ifpr.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+<h3>
+    Lista de Autores Registrados
+    <a href="{% url 'cadastrar-autor' %}" class="btn btn-primary btn-sm float-right">Adicionar Autor</a>
+</h3>
+
+<hr>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Opções</th>
+        </tr>
+    
+        {% for autor in object_list %}
+        <tr>
+            <td>{{ autor.nome }}</td>
+            <td>{{ autor.email }}</td>
+            <td>
+                <a href="{% url 'editar-autor' autor.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'excluir-autor' autor.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum autor registrado.</td>
+        </tr>
+        {% endfor %}
+    
+    </table>
+</div>
+{% endblock %}
