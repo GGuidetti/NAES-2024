@@ -3,9 +3,19 @@
 
 {% block conteudo %}
 <h3>Página inicial</h3>
+{% if not request.user.is_authenticated %}
+<p>
+    Para acessar o sistema, faça o login.
+</p>
+<p>
+    <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+</p>
+{% else %}
 
-{% if user.perfil.nome_completo %}
-Bem vindo ao sistema {{ user.perfil.nome_completo }}.
+    <p>
+        Olá, {{ request.user }}!
+    </p>
+
 {% endif %}
 
 {% endblock %}
