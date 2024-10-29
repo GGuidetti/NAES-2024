@@ -15,6 +15,20 @@
     <p>
         Olá, {{ request.user }}!
     </p>
+    <h4>Estatísticas</h4>
+        <ul>
+            <li>Qtde de receitas do blog: {{ qtdeReceitas }}</li>
+        </ul>
+
+        <h4>Algumas delas</h4>
+        
+        <ul>
+            {% for c in receitassAleatorias %}
+                <li>{{ c.nome }} - {{ c.categoria }}</li>
+            {% endfor %}
+            {{ queryset }}
+        </ul>
+    </p>
 
 {% endif %}
 
