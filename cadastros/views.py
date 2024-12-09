@@ -1,5 +1,8 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django_filters.views import FilterView
+
+from .filters import CategoriaFilter
 
 from .models import Autor, Categoria, Ingrediente, Receita, Comentario, Avaliacao
 
@@ -231,11 +234,11 @@ class AutorList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listas/autor.html'
 
 
-class CategoriaList(LoginRequiredMixin, ListView):
+class CategoriaList(LoginRequiredMixin, FilterView):
     login_url = reverse_lazy('login')
     model = Categoria
     template_name = 'cadastros/listas/categoria.html'
-
+    filterset_class = CategoriaFilter
 
 class IngredienteList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
