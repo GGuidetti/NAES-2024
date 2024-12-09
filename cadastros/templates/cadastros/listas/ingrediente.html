@@ -25,7 +25,7 @@
             {% for ingrediente in object_list %}
             <tr>
                 <td>{{ ingrediente.nome }}</td>
-                <td>{{ ingrediente.qtde }}</td>
+                <td class="quantidade">{{ ingrediente.qtde }}</td>
                 <td>{{ ingrediente.unidade_medida }}</td>
                 <td>
                     <a href="{% url 'editar-ingrediente' ingrediente.pk %}" class="btn btn-warning btn-sm" title="Editar">
@@ -45,4 +45,16 @@
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('.quantidade').each(function() {
+        var qtde = $(this).text().trim();  // Pega o valor da célula de quantidade
+
+        // Formata o valor com o símbolo '#' à frente
+        $(this).text('#' + qtde);  // Atualiza o conteúdo da célula com o símbolo '#'
+    });
+});;
+</script>
+
 {% endblock %}

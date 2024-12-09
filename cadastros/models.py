@@ -25,6 +25,9 @@ class Categoria(models.Model):
 
     def __str__(self):
         return "{}".format(self.nome)
+    
+    class Meta:
+        ordering = ["nome"]
 
 
 class Ingrediente(models.Model):

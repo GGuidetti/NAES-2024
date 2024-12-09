@@ -25,7 +25,7 @@
             {% for avaliacao in object_list %}
             <tr>
                 <td>{{ avaliacao.nota }}</td>
-                <td>{{ avaliacao.data_criacao }}</td>
+                <td>{{ avaliacao.data_criacao|date:"d/m/Y" }}</td>  
                 <td>{{ avaliacao.autor.nome }}</td>
                 <td>
                     <a href="{% url 'editar-avaliacao' avaliacao.pk %}" class="btn btn-warning btn-sm" title="Editar">

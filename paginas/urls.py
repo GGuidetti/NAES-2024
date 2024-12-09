@@ -8,4 +8,5 @@ urlpatterns = [
     path('sobre/', SobreView.as_view(), name='sobre'),
     path('', include('cadastros.urls')),
     path('usuarios/', include('usuarios.urls')), 
+    path("__debug__/", include("debug_toolbar.urls")),
 ]

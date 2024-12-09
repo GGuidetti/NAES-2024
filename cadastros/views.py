@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django_filters.views import FilterView
 
 from .filters import CategoriaFilter
+from .filters import AutorFilter
 
 from .models import Autor, Categoria, Ingrediente, Receita, Comentario, Avaliacao
 
@@ -27,6 +28,18 @@ class AutorCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Cadastro de Autor"
         return context
+    
+    def form_valid(self, form):
+        autor = form.save(commit=False)
+        autor.nome = 'anonimo'
+
+        autor.save()
+
+        from django.contrib import messages
+        messages.success(self.request, 'Autor cadastrado com sucesso!')
+
+        return super().form_valid(form)
+    
 
 
 class CategoriaCreate(LoginRequiredMixin, CreateView):
@@ -228,15 +241,16 @@ class AvaliacaoDelete(LoginRequiredMixin, DeleteView):
 
 # ################# LIST #################
 
-class AutorList(LoginRequiredMixin, ListView):
+class AutorList(LoginRequiredMixin, FilterView):
     login_url = reverse_lazy('login')
     model = Autor
     template_name = 'cadastros/listas/autor.html'
-
+    filterset_class = AutorFilter
 
 class CategoriaList(LoginRequiredMixin, FilterView):
     login_url = reverse_lazy('login')
     model = Categoria
+    paginate_by = 50
     template_name = 'cadastros/listas/categoria.html'
     filterset_class = CategoriaFilter
 
